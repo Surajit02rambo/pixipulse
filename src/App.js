@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { IoIosArrowBack, IoIosArrowForward, IoMdClose } from 'react-icons/io';
+import { FaCaretDown } from "react-icons/fa";
 import { HiBars3BottomRight } from "react-icons/hi2";
 import logo from './images/logo.png';
 import slide1 from './images/slide1.png';
@@ -124,7 +125,8 @@ function App() {
           {`${activeIndex + 1} / ${slides.length}`}
         </div>
         <div className='scroll-down'>
-          <p>SCROLL FOR MORE</p>
+          <p>SCROLL DOWN</p>
+          <center><FaCaretDown size={40} className='icon'/></center>
         </div>
       </div>
 
