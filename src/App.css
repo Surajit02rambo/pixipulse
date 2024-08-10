@@ -404,6 +404,7 @@ body {
   .carousel-caption {
     left: 40px;
     width: 85%;
+    top: 150px;
   }
   .carousel h1 {
     font-size: 14px;
