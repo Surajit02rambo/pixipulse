@@ -336,7 +336,7 @@ body {
     display: none;
   }
   .carousel-item{
-    height: 90vh;
+    height: 100vh;
   }
   .carousel-caption {
     width: 70%;
@@ -382,7 +382,7 @@ body {
 
 @media (max-width: 576px) {
   .carousel-item{
-    height: 80vh;
+    height: 90vh;
   }
   .carousel-caption {
     left: 80px;
@@ -407,7 +407,7 @@ body {
   .carousel-caption {
     left: 40px;
     width: 70%;
-    top: 200px;
+    top: 180px;
   }
   .carousel h1 {
     font-size: 14px;
