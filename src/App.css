@@ -50,7 +50,7 @@ body {
   height: 75px;
   background-color: transparent;
   color: white;
-  padding: 10px 85px;
+  padding: 10px 55px;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -309,49 +309,113 @@ body {
   font-size: 25px;
 }
 
-@media (max-width: 1380px) {
-  .carousel-caption{
-    left: 150px;
+/* Media Queries */
+@media (max-width: 1800px) {
+  .carousel-caption {
+    width: 60%;
+    left: 200px;
   }
-}
-
-@media (max-width: 850px) {
-  .carousel-caption{
-    left: 150px;
-  }
-  .carousel-caption h1{
-    font-size: 15px;
+  .carousel h1 {
+    font-size: 24px;
     margin-top: 70px;
   }
-  .carousel-caption h3{
-    font-size: 90px;
-    line-height: 80px;
+  .carousel h3 {
+    font-size: 100px;
+    line-height: 85px;
   }
-  .carousel-caption p{
+  .headlines{
+    margin-top: -50px;
+  }
+  .carousel p {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 992px) {
+  .carousel-item{
+    height: 90vh;
+  }
+  .carousel-caption {
+    width: 70%;
+    left: 100px;
+  }
+  .carousel h1 {
+    font-size: 20px;
+    margin-top: 60px;
+  }
+  .carousel h3 {
+    font-size: 80px;
+    line-height: 70px;
+  }
+  .carousel p {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-caption {
+    width: 60%;
+    left: 50;
+  }
+  .carousel h1 {
+    font-size: 18px;
+    margin-top: 40px;
+  }
+  .carousel h3 {
+    font-size: 60px;
+    line-height: 50px;
+  }
+  .headlines{
+    margin-top: -20px;
+    margin-left: -10px;
+  }
+  .carousel p {
     font-size: 20px;
   }
-}
-
-
-@media (max-width: 700px){
-  .carousel-caption{
-    left: 50px;
+  .side-menu {
+    width: 400px;
   }
 }
 
-@media (max-width: 500px){
-  .carousel-caption{
+@media (max-width: 576px) {
+  .carousel-item{
+    height: 80vh;
+  }
+  .carousel-caption {
+    left: 80px;
+  }
+  .carousel h1 {
+    font-size: 16px;
+    margin-top: 30px;
+  }
+  .carousel h3 {
+    font-size: 50px;
+    line-height: 45px;
+  }
+  .carousel p {
+    font-size: 18px;
+  }
+  .side-menu {
+    width: 300px;
+  }
+}
+
+@media (max-width: 450px) {
+  .carousel-caption {
     left: 40px;
+    width: 85%;
   }
-  .carousel-caption h3{
-    font-size: 70px;
-    line-height: 60px;
+  .carousel h1 {
+    font-size: 14px;
+    margin-top: 35px;
   }
-
-  .headlines{
-    margin-top: -30px;
+  .carousel h3 {
+    font-size: 50px;
   }
-  .carousel-caption p{
-    font-size: 15px;
+  .carousel p {
+    font-size: 16px;
+  }
+  .side-menu {
+    width: 250px;
   }
 }
