@@ -401,13 +401,25 @@ body {
   .side-menu {
     width: 300px;
   }
+
+  .slide-counter{
+    right: 20px;
+    bottom: 20px;
+    font-size: 18px;
+  }
+
+  .scroll-down{
+    left: 20px;
+    bottom: 20px;
+    font-size: 18px;
+  }
 }
 
 @media (max-width: 450px) {
   .carousel-caption {
     left: 40px;
     width: 70%;
-    top: 180px;
+    top: 200px;
   }
   .carousel h1 {
     font-size: 14px;
