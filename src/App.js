@@ -4,8 +4,6 @@ import { IoIosArrowBack, IoIosArrowForward, IoMdClose } from 'react-icons/io';
 import { FaCaretDown } from "react-icons/fa";
 import { HiBars3BottomRight } from "react-icons/hi2";
 import logo from './images/logo.png';
-import slide1 from './images/slide1.png';
-import slide2 from './images/slide2.png';
 
 function App() {
 
@@ -15,13 +13,13 @@ function App() {
 
   const slides = [
     {
-      src: slide1,
+      src: "https://i.postimg.cc/pTmvHqTX/slide1.png",
       title: "DIGITAL DREAMS DELIVERED",
       label: "Create Today Connect Tomorrow",
       caption: "Your Imagination defines our creation.",
     },
     {
-      src: slide2,
+      src: "https://i.postimg.cc/DyJSgPPh/slide2.png",
       title: "UNVEIL THE UNEXPECTED",
       label: "Crafting Pixels Shaping Futures",
       caption: "Transforming Ideas into Digital Gold."
