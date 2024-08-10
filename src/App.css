@@ -332,6 +332,9 @@ body {
 }
 
 @media (max-width: 992px) {
+  .cursor{
+    display: none;
+  }
   .carousel-item{
     height: 90vh;
   }
