@@ -297,7 +297,7 @@ body {
 
 .scroll-down {
   position: absolute;
-  bottom: 50px;
+  bottom: 30px;
   left: 50px;
   color: #fff;
   background-color: transparent;
@@ -410,7 +410,7 @@ body {
 
   .scroll-down{
     left: 20px;
-    bottom: 20px;
+    bottom: 5px;
     font-size: 18px;
   }
 }
