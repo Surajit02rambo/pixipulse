@@ -124,7 +124,7 @@ function App() {
           {`${activeIndex + 1} / ${slides.length}`}
         </div>
         <div className='scroll-down'>
-          <p>Scroll For More</p>
+          <p>SCROLL FOR MORE</p>
         </div>
       </div>
 
