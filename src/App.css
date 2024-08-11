@@ -398,11 +398,16 @@ body {
 
 @media (max-width: 576px) {
   .logo img{
-    height: 30px;
+    height: 50px;
   }
   .navbar ul li a{
     display: none;
   }
+
+  .navbar ul li .icon{
+    top: 35px !important;
+  }
+
   .carousel-item{
     height: 90vh;
   }
