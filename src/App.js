@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { IoIosArrowBack, IoIosArrowForward, IoMdClose } from 'react-icons/io';
 import { FaCaretDown } from "react-icons/fa";
+import { SiCreatereactapp } from "react-icons/si";
 import { HiBars3BottomRight } from "react-icons/hi2";
 import logo from './images/logo.png';
 
@@ -10,6 +11,7 @@ function App() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [cursorStyle, setCursorStyle] = useState({ top: 0, left: 0 });
+
 
   const slides = [
     {
@@ -37,6 +39,13 @@ function App() {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  const handlePlay = () => {
+    const video = document.getElementById('videoElement');
+    const playButton = document.getElementById('playButton');
+    video.play();
+    playButton.style.display = 'none';
+  }
 
   useEffect(() => {
     const moveCursor = (e) => {
@@ -90,7 +99,7 @@ function App() {
         </ul>
       </div>
 
-    {/* Sliding Menu */}
+    {/* Carousel Section */}
       <div className="carousel" id='home'>
         <div className="carousel-inner" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
           {slides.map((slide, index) => (
@@ -128,7 +137,38 @@ function App() {
         </div>
       </div>
 
-    
+
+      <div className='intro'>
+          <div className='intro-caption'>
+            <div className='intro-info'>
+              <SiCreatereactapp size={70} className='icon'/>
+              <p>lorem ipsum dolor lorem ipsum dolor</p>
+            </div>
+            <div className='intro-info'>
+              <SiCreatereactapp size={70} className='icon'/>
+              <p>lorem ipsum dolor lorem ipsum dolor</p>
+            </div>
+            <div className='intro-info'>
+              <SiCreatereactapp size={70} className='icon'/>
+              <p>lorem ipsum dolor lorem ipsum dolor</p>
+            </div>
+            <div className='intro-info'>
+              <SiCreatereactapp size={70} className='icon'/>
+              <p>lorem ipsum dolor lorem ipsum dolor</p>
+            </div>
+          </div>
+          <div className='intro-video'>
+            <div className="video-container">
+              <video id="videoElement" width="100%" height="auto" controls>
+                <source src="https://videos.pexels.com/video-files/3130182/3130182-sd_640_360_30fps.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div className="video-controls">
+                <button onClick={handlePlay} className="play-btn" id="playButton">Play</button>
+              </div>
+            </div>
+          </div>
+      </div>
     </div>
   );
 }
