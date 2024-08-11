@@ -399,6 +399,8 @@ body {
 @media (max-width: 576px) {
   .logo img{
     height: 50px;
+    position: absolute;
+    left: 30px;
   }
   .navbar ul li a{
     display: none;
