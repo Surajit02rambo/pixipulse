@@ -400,6 +400,9 @@ body {
   .logo img{
     height: 30px;
   }
+  .navbar ul li a{
+    display: none;
+  }
   .carousel-item{
     height: 90vh;
   }
