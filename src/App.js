@@ -20,12 +20,7 @@ function App() {
     localStorage.getItem('boxImage1') || '',
     localStorage.getItem('boxImage2') || '',
     localStorage.getItem('boxImage3') || '',
-    localStorage.getItem('boxImage4') || '',
-    localStorage.getItem('boxImage5') || '',
-    localStorage.getItem('boxImage6') || '',
   ]);
-  const [visibleCount, setVisibleCount] = useState(3);
-
   const introRef = useRef(null);
 
   const slides = [
@@ -85,10 +80,6 @@ function App() {
 
       reader.readAsDataURL(file);
     }
-  };
-
-  const handleLoadMore = () => {
-    setVisibleCount(prevCount => Math.min(boxImages.length, prevCount + 3));
   };
 
   useEffect(() => {
@@ -258,22 +249,22 @@ function App() {
 
       {/* Upload Section */}
       <div className="upload-section" id="uploadSection">
-        {boxImages.slice(0, visibleCount).map((imgSrc, index) => (
-          <div key={index} className="box" onClick={() => handleFileUpload(index)}>
-            {imgSrc ? <img src={imgSrc} alt="Uploaded preview" /> : <p>Click to Upload Image</p>}
-            <input
-              id={`fileInput${index}`}
-              type="file"
-              accept="image/*"
-              onChange={(event) => handleFileChange(index, event)}
-              style={{ display: 'none' }}
-            />
-          </div>
-          
-        ))}
-        {visibleCount < boxImages.length && (
-          <button className="load-more" onClick={handleLoadMore}>Load More</button>
-        )}
+        <h4>Our Moodboards</h4>
+        <h3>Explore Your Moods</h3>
+        <div className='box-container'>
+          {boxImages.map((imgSrc, index) => (
+            <div key={index} className="box" onClick={() => handleFileUpload(index)}>
+              {imgSrc ? <img src={imgSrc} alt="Uploaded preview" /> : <p>Click to Upload Image</p>}
+              <input
+                id={`fileInput${index}`}
+                type="file"
+                accept="image/*"
+                onChange={(event) => handleFileChange(index, event)}
+                style={{ display: 'none' }}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
