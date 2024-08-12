@@ -473,7 +473,7 @@ body {
   }
 
   #playButton{
-    display: none;
+    font-size: 50px;
   }
 }
 
