@@ -4,6 +4,7 @@ import { IoIosArrowBack, IoIosArrowForward, IoMdClose } from 'react-icons/io';
 import { IoCreate } from "react-icons/io5";
 import { FaCaretDown } from "react-icons/fa";
 import { SiGoogledisplayandvideo360, SiVorondesign } from "react-icons/si";
+import { AiFillLeftSquare } from "react-icons/ai";
 import { GiLightBulb } from "react-icons/gi";
 import { HiBars3BottomRight } from "react-icons/hi2";
 import { PiChalkboardTeacherDuotone } from "react-icons/pi";
@@ -16,12 +17,14 @@ function App() {
   const [cursorStyle, setCursorStyle] = useState({ top: 0, left: 0 });
   const [navbarScrolled, setNavbarScrolled] = useState(false);
   const [introVisible, setIntroVisible] = useState(false);
+  const [uploadVisible, setUploadVisible] = useState(false);
   const [boxImages, setBoxImages] = useState([
     localStorage.getItem('boxImage1') || '',
     localStorage.getItem('boxImage2') || '',
     localStorage.getItem('boxImage3') || '',
   ]);
   const introRef = useRef(null);
+  const uploadSectionRef = useRef(null);
 
   const slides = [
     {
@@ -138,6 +141,28 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const currentUploadSectionRef = uploadSectionRef.current;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setUploadVisible(true);
+        }
+      });
+    });
+
+    if (currentUploadSectionRef) {
+      observer.observe(currentUploadSectionRef);
+    }
+
+    return () => {
+      if (currentUploadSectionRef) {
+        observer.unobserve(currentUploadSectionRef);
+      }
+    };
+  }, []);
+
   return (
     <div className="App">
       {/* Custom Cursor */}
@@ -146,7 +171,7 @@ function App() {
       </div>
 
       {/* Header Section */}
-      <header className={`navbar ${navbarScrolled ? 'scrolled' : ''}`}>
+      <header className={`navbar ${navbarScrolled ? 'scrolled' : ''}`} id='HOME'>
         <div className="logo">
           <img src={logo} alt="logo" />
         </div>
@@ -166,9 +191,9 @@ function App() {
           <IoMdClose size={30} />
         </button>
         <ul>
-          <li><a href="#section1">Section 1</a></li>
-          <li><a href="#section2">Section 2</a></li>
-          <li><a href="#section3">Section 3</a></li>
+          <li><AiFillLeftSquare size={30} className='icon'/> <a href="#HOME">HOME</a></li>
+          <li><AiFillLeftSquare size={30} className='icon'/> <a href="#ABOUT">ABOUT</a></li>
+          <li><AiFillLeftSquare size={30} className='icon'/> <a href="#uploadSection">MOODBOARDS</a></li>
         </ul>
       </div>
 
@@ -211,7 +236,7 @@ function App() {
       </div>
 
       {/* Intro Section */}
-      <div className= {`intro ${introVisible ? 'visible' : ''}`} ref={introRef}>
+      <div className= {`intro ${introVisible ? 'visible' : ''}`} ref={introRef} id='ABOUT'>
         <div className='intro-caption'>
           <div className='intro-info'>
             <GiLightBulb size={80} className='icon' />
@@ -248,12 +273,20 @@ function App() {
       </div>
 
       {/* Upload Section */}
-      <div className="upload-section" id="uploadSection">
+      <div 
+        className={`upload-section ${uploadVisible ? 'slide-up' : ''}`} 
+        id="uploadSection" 
+        ref={uploadSectionRef}
+      >
         <h4>Our Moodboards</h4>
         <h3>Explore Your Moods</h3>
         <div className='box-container'>
           {boxImages.map((imgSrc, index) => (
-            <div key={index} className="box" onClick={() => handleFileUpload(index)}>
+            <div 
+              key={index} 
+              className={`box ${uploadVisible ? 'box-visible' : ''}`} 
+              onClick={() => handleFileUpload(index)}
+            >
               {imgSrc ? <img src={imgSrc} alt="Uploaded preview" /> : <p>Click to Upload Image</p>}
               <input
                 id={`fileInput${index}`}
