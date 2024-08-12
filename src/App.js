@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { IoIosArrowBack, IoIosArrowForward, IoMdClose } from 'react-icons/io';
+import { IoCreate } from "react-icons/io5";
 import { FaCaretDown } from "react-icons/fa";
-import { SiCreatereactapp, SiGoogledisplayandvideo360 } from "react-icons/si";
+import { SiGoogledisplayandvideo360, SiVorondesign  } from "react-icons/si";
+import { GiLightBulb } from "react-icons/gi";
 import { HiBars3BottomRight } from "react-icons/hi2";
+import { PiChalkboardTeacherDuotone } from "react-icons/pi";
 import logo from './images/logo.png';
 import video from './images/introVideo.mp4'
 
@@ -13,6 +16,8 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cursorStyle, setCursorStyle] = useState({ top: 0, left: 0 });
   const [navbarScrolled, setNavbarScrolled] = useState(false);
+
+
 
   const slides = [
     {
@@ -59,7 +64,7 @@ function App() {
         });
       });
     };
-
+  
     window.addEventListener('mousemove', moveCursor);
 
     return () => {
@@ -91,7 +96,7 @@ function App() {
       </div>
 
       {/* Header Section */}
-      <header className={`navbar ${navbarScrolled ? 'scrolled' : ''}`}>
+      <header className = {`navbar ${navbarScrolled ? 'scrolled' : ''}`}>
         <div className="logo">
           <img src={logo} alt="logo" />
         </div>
@@ -117,7 +122,7 @@ function App() {
         </ul>
       </div>
 
-      {/* Carousel Section */}
+    {/* Carousel Section */}
       <div className="carousel" id='home'>
         <div className="carousel-inner" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
           {slides.map((slide, index) => (
@@ -155,24 +160,28 @@ function App() {
         </div>
       </div>
 
-      {/* Intro Section */}
+
       <div className='intro'>
           <div className='intro-caption'>
             <div className='intro-info'>
-              <SiCreatereactapp size={70} className='icon'/>
-              <p>lorem ipsum dolor lorem ipsum dolor</p>
+              <GiLightBulb size={80} className='icon'/>
+              <h4>Think</h4>
+              <p>Retrospect a unique pattern in mind to proceed.</p>
             </div>
             <div className='intro-info'>
-              <SiCreatereactapp size={70} className='icon'/>
-              <p>lorem ipsum dolor lorem ipsum dolor</p>
+              <PiChalkboardTeacherDuotone size={80} className='icon'/>
+              <h4>Learn</h4>
+              <p>Get started with something new to learn something new.</p>
             </div>
             <div className='intro-info'>
-              <SiCreatereactapp size={70} className='icon'/>
-              <p>lorem ipsum dolor lorem ipsum dolor</p>
+              <SiVorondesign size={80} className='icon'/>
+              <h4>Design</h4>
+              <p>Craft your ideas into reality and make the most out of it.</p>
             </div>
             <div className='intro-info'>
-              <SiCreatereactapp size={70} className='icon'/>
-              <p>lorem ipsum dolor lorem ipsum dolor</p>
+              <IoCreate size={80} className='icon'/>
+              <h4>Create</h4>
+              <p>Make your passion your goals and achieve them to gain success.</p>
             </div>
           </div>
           <div className='intro-video'>
