@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import { IoIosArrowBack, IoIosArrowForward, IoMdClose } from 'react-icons/io';
 import { IoCreate } from "react-icons/io5";
 import { FaCaretDown } from "react-icons/fa";
-import { SiGoogledisplayandvideo360, SiVorondesign  } from "react-icons/si";
+import { SiGoogledisplayandvideo360, SiVorondesign } from "react-icons/si";
 import { GiLightBulb } from "react-icons/gi";
 import { HiBars3BottomRight } from "react-icons/hi2";
 import { PiChalkboardTeacherDuotone } from "react-icons/pi";
 import logo from './images/logo.png';
-import video from './images/introVideo.mp4'
+import video from './images/introVideo.mp4';
 
 function App() {
-
   const [activeIndex, setActiveIndex] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [cursorStyle, setCursorStyle] = useState({ top: 0, left: 0 });
   const [navbarScrolled, setNavbarScrolled] = useState(false);
+  const [introVisible, setIntroVisible] = useState(false);
 
-
+  const introRef = useRef(null);
 
   const slides = [
     {
@@ -30,7 +30,7 @@ function App() {
       src: "https://i.postimg.cc/DyJSgPPh/slide2.png",
       title: "UNVEIL THE UNEXPECTED",
       label: "Crafting Pixels Shaping Futures",
-      caption: "Transforming Ideas into Digital Gold."
+      caption: "Transforming Ideas into Digital Gold.",
     },
   ];
 
@@ -52,7 +52,7 @@ function App() {
     videoElement.controls = true;
     videoElement.play();
     playButton.style.display = 'none';
-  }
+  };
 
   useEffect(() => {
     const moveCursor = (e) => {
@@ -64,7 +64,7 @@ function App() {
         });
       });
     };
-  
+
     window.addEventListener('mousemove', moveCursor);
 
     return () => {
@@ -74,7 +74,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) { // Adjust the scroll value as needed
+      if (window.scrollY > 50) {
         setNavbarScrolled(true);
       } else {
         setNavbarScrolled(false);
@@ -88,6 +88,28 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const currentIntroRef = introRef.current;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIntroVisible(true);
+        }
+      });
+    });
+
+    if (currentIntroRef) {
+      observer.observe(currentIntroRef);
+    }
+
+    return () => {
+      if (currentIntroRef) {
+        observer.unobserve(currentIntroRef);
+      }
+    };
+  }, []);
+
   return (
     <div className="App">
       {/* Custom Cursor */}
@@ -96,7 +118,7 @@ function App() {
       </div>
 
       {/* Header Section */}
-      <header className = {`navbar ${navbarScrolled ? 'scrolled' : ''}`}>
+      <header className={`navbar ${navbarScrolled ? 'scrolled' : ''}`}>
         <div className="logo">
           <img src={logo} alt="logo" />
         </div>
@@ -104,7 +126,7 @@ function App() {
           <ul>
             <li onClick={toggleMenu}>
               <a href="#home">MENU</a>
-              <HiBars3BottomRight className='icon' size={30} />
+              <HiBars3BottomRight className="icon" size={30} />
             </li>
           </ul>
         </nav>
@@ -122,19 +144,16 @@ function App() {
         </ul>
       </div>
 
-    {/* Carousel Section */}
-      <div className="carousel" id='home'>
+      {/* Carousel Section */}
+      <div className="carousel" id="home">
         <div className="carousel-inner" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
           {slides.map((slide, index) => (
-            <div
-              key={index}
-              className={`carousel-item ${index === activeIndex ? 'active' : ''}`}
-            >
+            <div key={index} className={`carousel-item ${index === activeIndex ? 'active' : ''}`}>
               <center>
                 <div className="carousel-caption">
                   <h1>{slide.title}</h1>
                   <h3>{slide.label}</h3>
-                  <div className='headlines'>
+                  <div className="headlines">
                     <p>{slide.caption}</p>
                   </div>
                 </div>
@@ -154,47 +173,47 @@ function App() {
         <div className="slide-counter">
           {`${activeIndex + 1} / ${slides.length}`}
         </div>
-        <div className='scroll-down'>
+        <div className="scroll-down">
           <p>SCROLL DOWN</p>
-          <center><FaCaretDown size={40} className='icon'/></center>
+          <center><FaCaretDown size={40} className="icon" /></center>
         </div>
       </div>
 
-
-      <div className='intro'>
-          <div className='intro-caption'>
-            <div className='intro-info'>
-              <GiLightBulb size={80} className='icon'/>
-              <h4>Think</h4>
-              <p>Retrospect a unique pattern in mind to proceed.</p>
-            </div>
-            <div className='intro-info'>
-              <PiChalkboardTeacherDuotone size={80} className='icon'/>
-              <h4>Learn</h4>
-              <p>Get started with something new to learn something new.</p>
-            </div>
-            <div className='intro-info'>
-              <SiVorondesign size={80} className='icon'/>
-              <h4>Design</h4>
-              <p>Craft your ideas into reality and make the most out of it.</p>
-            </div>
-            <div className='intro-info'>
-              <IoCreate size={80} className='icon'/>
-              <h4>Create</h4>
-              <p>Make your passion your goals and achieve them to gain success.</p>
+      {/* Intro Section */}
+      <div className={`intro ${introVisible ? 'visible' : ''}`} ref={introRef}>
+        <div className="intro-caption">
+          <div className="intro-info">
+            <GiLightBulb size={80} className="icon" />
+            <h4>Think</h4>
+            <p>Retrospect a unique pattern in mind to proceed.</p>
+          </div>
+          <div className="intro-info">
+            <PiChalkboardTeacherDuotone size={80} className="icon" />
+            <h4>Learn</h4>
+            <p>Get started with something new to learn something new.</p>
+          </div>
+          <div className="intro-info">
+            <SiVorondesign size={80} className="icon" />
+            <h4>Design</h4>
+            <p>Craft your ideas into reality and make the most out of it.</p>
+          </div>
+          <div className="intro-info">
+            <IoCreate size={80} className="icon" />
+            <h4>Create</h4>
+            <p>Make your passion your goals and achieve them to gain success.</p>
+          </div>
+        </div>
+        <div className="intro-video">
+          <div className="video-container">
+            <video id="videoElement" width="100%" height="auto">
+              <source src={video} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div className="video-controls">
+              <button onClick={handlePlay} className="play-btn" id="playButton"><SiGoogledisplayandvideo360 size={80} /></button>
             </div>
           </div>
-          <div className='intro-video'>
-            <div className="video-container">
-              <video id="videoElement" width="100%" height="auto">
-                <source src = {video} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-              <div className="video-controls">
-                <button onClick={handlePlay} className="play-btn" id="playButton"><SiGoogledisplayandvideo360 size={80}/></button>
-              </div>
-            </div>
-          </div>
+        </div>
       </div>
     </div>
   );

@@ -338,6 +338,14 @@ body {
   margin-top: 300px;
   margin-bottom: 200px;
   gap: 50px;
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all 2s ease-in-out;
+}
+
+.intro.visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .intro-caption{
