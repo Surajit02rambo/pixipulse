@@ -2,16 +2,17 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { IoIosArrowBack, IoIosArrowForward, IoMdClose } from 'react-icons/io';
 import { FaCaretDown } from "react-icons/fa";
-import { SiCreatereactapp } from "react-icons/si";
+import { SiCreatereactapp, SiGoogledisplayandvideo360 } from "react-icons/si";
 import { HiBars3BottomRight } from "react-icons/hi2";
 import logo from './images/logo.png';
+import video from './images/introVideo.mp4'
 
 function App() {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [cursorStyle, setCursorStyle] = useState({ top: 0, left: 0 });
-
+  const [navbarScrolled, setNavbarScrolled] = useState(false);
 
   const slides = [
     {
@@ -41,9 +42,10 @@ function App() {
   };
 
   const handlePlay = () => {
-    const video = document.getElementById('videoElement');
+    const videoElement = document.getElementById('videoElement');
     const playButton = document.getElementById('playButton');
-    video.play();
+    videoElement.controls = true;
+    videoElement.play();
     playButton.style.display = 'none';
   }
 
@@ -65,6 +67,22 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) { // Adjust the scroll value as needed
+        setNavbarScrolled(true);
+      } else {
+        setNavbarScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <div className="App">
       {/* Custom Cursor */}
@@ -73,7 +91,7 @@ function App() {
       </div>
 
       {/* Header Section */}
-      <header className="navbar">
+      <header className={`navbar ${navbarScrolled ? 'scrolled' : ''}`}>
         <div className="logo">
           <img src={logo} alt="logo" />
         </div>
@@ -99,7 +117,7 @@ function App() {
         </ul>
       </div>
 
-    {/* Carousel Section */}
+      {/* Carousel Section */}
       <div className="carousel" id='home'>
         <div className="carousel-inner" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
           {slides.map((slide, index) => (
@@ -137,7 +155,7 @@ function App() {
         </div>
       </div>
 
-
+      {/* Intro Section */}
       <div className='intro'>
           <div className='intro-caption'>
             <div className='intro-info'>
@@ -159,12 +177,12 @@ function App() {
           </div>
           <div className='intro-video'>
             <div className="video-container">
-              <video id="videoElement" width="100%" height="auto" controls>
-                <source src="https://videos.pexels.com/video-files/3130182/3130182-sd_640_360_30fps.mp4" type="video/mp4" />
+              <video id="videoElement" width="100%" height="auto">
+                <source src = {video} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
               <div className="video-controls">
-                <button onClick={handlePlay} className="play-btn" id="playButton">Play</button>
+                <button onClick={handlePlay} className="play-btn" id="playButton"><SiGoogledisplayandvideo360 size={80}/></button>
               </div>
             </div>
           </div>
