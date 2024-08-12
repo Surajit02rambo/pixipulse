@@ -58,7 +58,8 @@ body {
 }
 
 .navbar.scrolled {
-  background-color: rgba(0, 0, 0, 0.8); /* Change this to the desired background color */
+  
+  background-color: rgb(14, 12, 12); /* Change this to the desired background color */
 } 
 
 .logo {
@@ -417,6 +418,48 @@ body {
 #playButton:hover {
   color: goldenrod;
 }
+
+.upload-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  height: auto;
+  padding-top: 100px;
+}
+
+.box {
+  width: 550px;
+  height: 550px;
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.652);
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.box p {
+  position: absolute;
+  bottom: 10px;
+  color: #888;
+  font-size: 14px;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 5px;
+}
+
+
+
 /* Media Queries */
 @media (max-width: 1800px) {
   .carousel-caption {
@@ -483,6 +526,11 @@ body {
   #playButton{
     font-size: 50px;
   }
+
+  .box{
+    height: 300px;
+    width: 300px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -507,6 +555,10 @@ body {
   }
   .side-menu {
     width: 400px;
+  }
+  .box{
+    height: 550px;
+    width: 550px;
   }
 }
 
@@ -556,6 +608,11 @@ body {
     bottom: 10px;
     font-size: 15px;
   }
+
+  .box{
+    height: 400px;
+    width: 400px;
+  }
 }
 
 @media (max-width: 450px) {
@@ -576,5 +633,9 @@ body {
   }
   .side-menu {
     width: 250px;
+  }
+  .box{
+    height: 300px;
+    width: 300px;
   }
 }

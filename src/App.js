@@ -16,6 +16,14 @@ function App() {
   const [cursorStyle, setCursorStyle] = useState({ top: 0, left: 0 });
   const [navbarScrolled, setNavbarScrolled] = useState(false);
   const [introVisible, setIntroVisible] = useState(false);
+  const [boxImages, setBoxImages] = useState([
+    localStorage.getItem('boxImage1') || '',
+    localStorage.getItem('boxImage2') || '',
+    localStorage.getItem('boxImage2') || '',
+    localStorage.getItem('boxImage2') || '',
+    localStorage.getItem('boxImage2') || '',
+    localStorage.getItem('boxImage2') || '',
+  ]);
 
   const introRef = useRef(null);
 
@@ -52,6 +60,30 @@ function App() {
     videoElement.controls = true;
     videoElement.play();
     playButton.style.display = 'none';
+  };
+
+  const handleFileUpload = (index) => {
+    const fileInput = document.getElementById(`fileInput${index}`);
+    if (fileInput) {
+      fileInput.click();
+    }
+  };
+
+  const handleFileChange = (index, event) => {
+    const files = event.target.files;
+    if (files.length > 0) {
+      const file = files[0];
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const newBoxImages = [...boxImages];
+        newBoxImages[index] = e.target.result;
+        setBoxImages(newBoxImages);
+        localStorage.setItem(`boxImage${index + 1}`, e.target.result);
+      };
+
+      reader.readAsDataURL(file);
+    }
   };
 
   useEffect(() => {
@@ -126,7 +158,7 @@ function App() {
           <ul>
             <li onClick={toggleMenu}>
               <a href="#home">MENU</a>
-              <HiBars3BottomRight className="icon" size={30} />
+              <HiBars3BottomRight className='icon' size={30} />
             </li>
           </ul>
         </nav>
@@ -145,15 +177,18 @@ function App() {
       </div>
 
       {/* Carousel Section */}
-      <div className="carousel" id="home">
+      <div className="carousel" id='home'>
         <div className="carousel-inner" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
           {slides.map((slide, index) => (
-            <div key={index} className={`carousel-item ${index === activeIndex ? 'active' : ''}`}>
+            <div
+              key={index}
+              className={`carousel-item ${index === activeIndex ? 'active' : ''}`}
+            >
               <center>
                 <div className="carousel-caption">
                   <h1>{slide.title}</h1>
                   <h3>{slide.label}</h3>
-                  <div className="headlines">
+                  <div className='headlines'>
                     <p>{slide.caption}</p>
                   </div>
                 </div>
@@ -173,47 +208,66 @@ function App() {
         <div className="slide-counter">
           {`${activeIndex + 1} / ${slides.length}`}
         </div>
-        <div className="scroll-down">
+        <div className='scroll-down'>
           <p>SCROLL DOWN</p>
-          <center><FaCaretDown size={40} className="icon" /></center>
+          <center><FaCaretDown size={40} className='icon' /></center>
         </div>
       </div>
 
       {/* Intro Section */}
-      <div className={`intro ${introVisible ? 'visible' : ''}`} ref={introRef}>
-        <div className="intro-caption">
-          <div className="intro-info">
-            <GiLightBulb size={80} className="icon" />
+      <div className= {`intro ${introVisible ? 'visible' : ''}`} ref={introRef}>
+        <div className='intro-caption'>
+          <div className='intro-info'>
+            <GiLightBulb size={80} className='icon' />
             <h4>Think</h4>
             <p>Retrospect a unique pattern in mind to proceed.</p>
           </div>
-          <div className="intro-info">
-            <PiChalkboardTeacherDuotone size={80} className="icon" />
+          <div className='intro-info'>
+            <PiChalkboardTeacherDuotone size={80} className='icon' />
             <h4>Learn</h4>
             <p>Get started with something new to learn something new.</p>
           </div>
-          <div className="intro-info">
-            <SiVorondesign size={80} className="icon" />
+          <div className='intro-info'>
+            <SiVorondesign size={80} className='icon' />
             <h4>Design</h4>
             <p>Craft your ideas into reality and make the most out of it.</p>
           </div>
-          <div className="intro-info">
-            <IoCreate size={80} className="icon" />
+          <div className='intro-info'>
+            <IoCreate size={80} className='icon' />
             <h4>Create</h4>
             <p>Make your passion your goals and achieve them to gain success.</p>
           </div>
         </div>
-        <div className="intro-video">
+        <div className='intro-video'>
           <div className="video-container">
             <video id="videoElement" width="100%" height="auto">
               <source src={video} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <div className="video-controls">
-              <button onClick={handlePlay} className="play-btn" id="playButton"><SiGoogledisplayandvideo360 size={80} /></button>
+              <button onClick={handlePlay} className="play-btn" id="playButton">
+                <SiGoogledisplayandvideo360 size={80} />
+              </button>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Upload Section */}
+      <div className="upload-section" id="uploadSection">
+        {boxImages.map((imgSrc, index) => (
+          <div key={index} className="box" onClick={() => handleFileUpload(index)}>
+            <img src={imgSrc} alt="Uploaded preview" />
+            <input
+              id={`fileInput${index}`}
+              type="file"
+              accept="image/*"
+              onChange={(event) => handleFileChange(index, event)}
+              style={{ display: 'none' }}
+            />
+            <p>Click to Upload Image</p>
+          </div>
+        ))}
       </div>
     </div>
   );
